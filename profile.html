@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image and Information Upload</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+        background-image: url('UD.jpg');
+
+    }
+    .container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #5dbd30;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    h2 {
+        text-align: center;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="file"] {
+        display: block;
+        width: 90%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Upload Your Information and Image</h2>
+    <form action="#" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age" required>
+        </div>
+        <div class="form-group">
+            <label for="residence">Residence:</label>
+            <input type="text" id="residence" name="residence" required>
+        </div>
+        <div class="form-group">
+            <label for="image">Choose Image:</label>
+            <input type="file" id="image" name="image"  required>
+        </div>
+        <button type="submit">Upload</button>
+    </form>
+</div>
+
+
+<script>
+    document.querySelector('form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const response = await fetch(this.action, {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.json();
+        if (result.success) {
+            document.getElementById('profile').innerHTML = `
+                <p>Name: ${result.name}</p>
+                <p>Age: ${result.age}</p>
+                <p>Residence: ${result.residence}</p>
+                <img src="${result.image_url}" alt="Uploaded Image" style="max-width: 200px;">
+            `;
+        } else {
+            alert("Error uploading profile. Please try again.");
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>
