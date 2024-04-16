@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Academic Results</title>
+    <style>
+        /* Reset some default styles */
+        body, table {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #c7c7d4;
+            padding: 20px;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            color: #2196F3;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Grade styles */
+        .grade {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .grade-excellent {
+            background-color: #4CAF50;
+        }
+
+        .grade-good {
+            background-color: #2196F3;
+        }
+
+        .grade-average {
+            background-color: #FFC107;
+        }
+
+        .grade-poor {
+            background-color: #F44336;
+        }
+
+        /* Result summary styles */
+        .result-summary {
+            margin-top: 20px;
+        }
+
+        /* Responsive table */
+        @media screen and (max-width: 600px) {
+            table {
+                width: 100%;
+            }
+
+            table, th, td {
+                display: block;
+            }
+
+            th, td {
+                border: none;
+                padding: 8px;
+                text-align: left;
+                color: #0b180b;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Academic Results</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Course 1</th>
+                <th>Course 2</th>
+                <th>Course 3</th>
+                <th>Course 4</th>
+                <th>Course 5</th>
+                <th>Course 6</th>
+                <th>Course 7</th>
+                <th>AVERAGE</th>
+            </tr>
+        </thead>
+        <tbody id="student-results">
+            
+        </tbody>
+    </table>
+    <div class="result-summary">
+        <h2>Result Summary</h2>
+        <p>Total students: <span id="total-students">0</span></p>
+        <p>Overall average: <span id="overall-gpa">0.00</span></p>
+    </div>
+
+    <script>
+        function addStudent() {
+            // Get the input values
+            var studentID = document.getElementById("student-id").value;
+            var name = document.getElementById("name").value;
+            var courses = [];
+            for (var i = 1; i <= 7; i++) {
+                courses.push(document.getElementById("course-" + i).value);
+            }
+
+            // Calculate GPA
+            var total = courses.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+            var gpa = (total / courses.length).toFixed(2);
+
+            // Create a new table row with the student details
+            var newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td>${studentID}</td>
+                <td>${name}</td>
+                <td>${courses[0]}</td>
+                <td>${courses[1]}</td>
+                <td>${courses[2]}</td>
+                <td>${courses[3]}</td>
+                <td>${courses[4]}</td>
+                <td>${courses[5]}</td>
+                <td>${courses[6]}</td>
+                <td>${gpa}</td>
+            `;
+
+            // Append the new row to the table
+            document.getElementById("student-results").appendChild(newRow);
+
+            // Update the result summary
+            var totalStudents = document.getElementById("total-students");
+            var overallGPA = document.getElementById("overall-gpa");
+            var currentTotal = parseInt(totalStudents.innerText);
+            var currentGPA = parseFloat(overallGPA.innerText);
+            totalStudents.innerText = currentTotal + 1;
+            overallGPA.innerText = ((currentGPA * currentTotal) + parseFloat(gpa)) / (currentTotal + 1);
+
+            // Clear the input fields
+            document.getElementById("student-id").value = "";
+            document.getElementById("name").value = "";
+            for (var i = 1; i <= 7; i++) {
+                document.getElementById("course-" + i).value = "";
+            }
+        }
+    </script>
+
+    <h2>Add Student</h2>
+    <form>
+        <label for="student-id">Student ID:</label>
+        <input type="text" id="student-id" required><br><br>
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br><br>
+        <label for="course-1">Course 1:</label>
+        <input type="number" id="course-1" required><br><br>
+        <label for="course-2">Course 2:</label>
+        <input type="number" id="course-2" required><br><br>
+        <label for="course-3">Course 3:</label>
+        <input type="number" id="course-3" required><br><br>
+        <label for="course-4">Course 4:</label>
+        <input type="number" id="course-4" required><br><br>
+        <label for="course-5">Course 5:</label>
+        <input type="number" id="course-5" required><br><br>
+        <label for="course-6">Course 6:</label>
+        <input type="number" id="course-6" required><br><br>
+        <label for="course-7">Course 7:</label>
+        <input type="number" id="course-7" required><br><br>
+        <button type="button" onclick="addStudent()">Add Student</button>
+    </form>
+</body>
+</html>

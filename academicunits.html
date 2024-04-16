@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academic Units - University of Dar es Salaam</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #dcdbe0;
+    }
+    nav {
+        width: 200px;
+        background-color: #000000;
+        color: #fff;
+        padding: 10px;
+        position: fixed;
+        height: 100%;
+        overflow-y: auto;
+    }
+    nav img {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        animation: logoAnimation 6s infinite;
+    }
+    
+    nav a {
+        display: block;
+        color: #4e4fa8;
+        text-decoration: none;
+        padding: 10px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+    }
+    nav a:hover {
+        background-color: #555;
+    }
+    .container {
+        margin-left: 220px;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .unit-info {
+        display: none;
+    }
+    .active {
+        display: block;
+    }
+    .msangi,h3{
+        display: block;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+    <nav> <div class="msangi">
+        <h3>UDSM</h3>
+        <img src="ti.jpg" alt="University Logo">
+    </div>
+        
+        <a href="#business">CBSL</a>
+        <a href="#law">Faculty of Law</a>
+        <a href="#engineering">CET</a>
+        <a href="#cnms">CNMS</a>
+
+    </nav>
+    <div class="container">
+        <h1>Academic Units - University of Dar es Salaam</h1>
+        <div id="business" class="unit-info active">
+            <h2>School of Business Studies</h2>
+            <p>The School of Business Studies offers undergraduate and postgraduate programs in various fields of business and management.</p>
+        </div>
+        <div id="law" class="unit-info">
+            <h2>Faculty of Law</h2>
+            <p>The Faculty of Law is one of the leading law schools in East Africa, offering programs that prepare students for careers in law and related fields.</p>
+        </div>
+        <div id="engineering" class="unit-info">
+            <h2>College of Engineering and Technology</h2>
+            <p>The College of Engineering and Technology offers a wide range of programs in engineering, technology, and related disciplines.</p>
+        </div>
+        <div id="cnms" class="unit-info">
+            <h2>College of Natural and Mathematical science</h2>
+            <p>The college of Natural and Mathematical Science offer a wide range of program in mathematical science,statistics and natural sciences</p>
+        </div>
+        <div id="cnms" class="unit-info">
+            <h2>College of Humanities and social science</h2>
+            <p>The college of huma offer a wide range of program in mathematical science,statistics and natural sciences</p>
+        </div>
+
+
+
+
+    </div>
+
+    <script>
+        const unitInfo = document.querySelectorAll('.unit-info');
+
+        document.querySelectorAll('nav a').forEach((link) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                unitInfo.forEach((unit) => unit.classList.remove('active'));
+                document.querySelector(e.target.getAttribute('href')).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
